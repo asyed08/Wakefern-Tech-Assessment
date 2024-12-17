@@ -171,7 +171,17 @@ public class LinkedList {
     }
 
     //Reverse LinkedList
-
+    public void reverse(){
+        Node prev = null;
+        Node curr = head;
+        while(curr != null){
+            Node next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+    }
 
     //Tests
     public static void main(String[] args) {
@@ -211,8 +221,11 @@ public class LinkedList {
 
         //Search case when element in list
         testlist.search(20);
+        System.out.println();
 
         //Reverse
+        testlist.reverse();
+        testlist.printAll();
     }
 
 }
