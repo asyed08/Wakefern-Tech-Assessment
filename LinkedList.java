@@ -156,8 +156,22 @@ public class LinkedList {
     }
 
     //Search - finding provided value in list
+    public void search(int value){
+        Node traversingNode = head;
+        int position = 1;
+        while(traversingNode!=null){
+            if(traversingNode.data == value){
+                System.out.println("Value found in position " + position);
+                return;
+            }
+            position++;
+            traversingNode = traversingNode.next;
+        }
+        System.out.println("Value not present in linked list.");
+    }
 
     //Reverse LinkedList
+
 
     //Tests
     public static void main(String[] args) {
@@ -189,6 +203,14 @@ public class LinkedList {
         testlist.printAll();
 
         //Search
+        System.out.println();
+
+        //Search case when element not in list
+        testlist.search(3);
+        System.out.println();
+
+        //Search case when element in list
+        testlist.search(20);
 
         //Reverse
     }
