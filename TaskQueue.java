@@ -6,7 +6,7 @@ public class TaskQueue {
     private Map<String, Set<String>> taskDependencies = new HashMap<>();
     private Map<String, Integer> taskExecutionOrder = new HashMap<>();
     private List<String> nodes = new ArrayList<>();
-    private Map<String, List<String>> nodeAssignments = new HashMap<>();
+    public Map<String, List<String>> nodeAssignments = new HashMap<>();
     private int taskCounter = 0;
 
     //Add task to queue
@@ -64,7 +64,7 @@ public class TaskQueue {
     }
 
     //This method will tell us if there is a cycle in dependencies graph. Cycles are bad because they will mess up execution order and throw ane error in getExecutionOrder() method.
-    private boolean hasCycle(String taskId, Set<String> visited, Set<String> stack, List<String> orderedTasks){
+    public boolean hasCycle(String taskId, Set<String> visited, Set<String> stack, List<String> orderedTasks){
         if(stack.contains(taskId)){
             return true;
         }
@@ -95,7 +95,7 @@ public class TaskQueue {
     }
 
     //Handle node failure and reassign tasks.
-    public void handleNodeFailures(String nodeId){
+    public void handleNodeFailure(String nodeId){
         if(!nodeAssignments.containsKey(nodeId)){
             System.out.println("Node " + nodeId + " doesn't exist or has no assigned tasks.");
             return;
