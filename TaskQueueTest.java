@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class TaskQueueTest {
@@ -37,6 +38,10 @@ public class TaskQueueTest {
         //Node failure simulation
         taskQueue.handleNodeFailure("N1");
         System.out.println("Task assignments after node failure: " + taskQueue.nodeAssignments);
+
+        //Missing dependency Error test
+        taskQueue.updateTask("B", 3, Arrays.asList("G"));
+        System.out.println("Execution Order: " + taskQueue.getExecutionOrder());
 
 
     }

@@ -50,6 +50,11 @@ public class TaskQueue {
         Set<String> visited = new HashSet<>();
         Set<String> stack = new HashSet<>();
 
+        if(containsMissingDependency(taskDependencies)==true){
+            System.out.println("Error. There is a dependency that does not actually exist. Missing dependency.");
+            return Collections.emptyList();
+        }
+
         for(String taskId: taskMap.keySet()){
             if(!visited.contains(taskId)){
                 if(hasCycle(taskId, visited, stack, orderedTasks)){
@@ -59,8 +64,21 @@ public class TaskQueue {
             }
         }
 
+
         orderedTasks.sort((task1, task2)-> taskMap.get(task2).getPriority()-taskMap.get(task1).getPriority());
         return orderedTasks;
+    }
+
+    public boolean containsMissingDependency(Map<String, Set<String>> taskDependencies){
+        for(String taskId: taskDependencies.keySet()){
+            Set<String> deps = taskDependencies.get(taskId);
+            for(String s: deps){
+                if(!(taskDependencies.keySet().contains(s))){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     //This method will tell us if there is a cycle in dependencies graph. Cycles are bad because they will mess up execution order and throw ane error in getExecutionOrder() method.
